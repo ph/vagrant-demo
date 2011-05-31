@@ -34,6 +34,11 @@ class mysqlserver {
   }
 }
 
+node development {
+  include rabbitmq
+  include mysqlserver
+}
 
-include mysqlserver
-include rabbitmq
+node default inherits development {
+  
+}
