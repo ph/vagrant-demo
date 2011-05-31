@@ -1,15 +1,14 @@
-- Installer virtual box
+# Setup
+- Install Virtual box http://www.virtualbox.org/
 - gem install vagrant
 - vagrant box add lucid64 http://files.vagrantup.com/lucid64.box
-- cd ton/projet
+- cd vagrant-demo
 - vagrant up
 
-si tu veux te connecter dessus
-vagrant ssh
+# handy commands
+Connect to it:  vagrant ssh
 
-Suspendre
-vagrant suspend
+halt: vagrant suspend
 
-aide
 vagrant --help
 
