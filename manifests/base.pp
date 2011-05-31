@@ -1,6 +1,16 @@
+class apt {
+  exec { "apt-get update":
+    command => "/usr/bin/apt-get update && touch /tmp/apt.update",
+    onlyif => "/bin/sh -c '[ ! -f /tmp/apt.update ] || /usr/bin/find /etc/apt -cnewer /tmp/apt.update | /bin/grep . > /dev/null'",
+  }
+}
+
 class rabbitmq {
+  include apt
+  
   package { "rabbitmq-server":
-    ensure => present
+    ensure => present,
+    require => Class["apt"]
   }
 
   service { "rabbitmq":
@@ -11,8 +21,11 @@ class rabbitmq {
 
 
 class mysqlserver {
+  include apt
+
   package { "mysql-server":
-    ensure => present
+    ensure  => present,
+    require => Class["apt"]
   }
 
   service { "mysqld":
@@ -21,6 +34,6 @@ class mysqlserver {
   }
 }
 
-include rabbitmq
-include mysqlserver
 
+include mysqlserver
+include rabbitmq
